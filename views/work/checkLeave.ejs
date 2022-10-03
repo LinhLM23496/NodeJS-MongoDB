@@ -1,0 +1,101 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/report.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <main>
+                <% if (errorMessage) { %>
+                    <div class="user-message user-message--error">
+                        <%= errorMessage %>
+                    </div>
+                    <% } %>
+                        <% if(user.annualLeave> 0) { %>
+                            <h2 style="text-align: center;">Xin nghỉ phép</h2>
+                            <div>
+                                <p style="text-align: center;">Số ngày còn lại: <%= user.annualLeave/8 %>
+                                </p>
+                            </div>
+                            <div class="grid">
+                                <form class="mt-5" action="/import_leave" method="POST">
+                                    <label for="checkLeave"><input type="radio" id="checkLeave" name="checkLeave"
+                                            value="1" /> Một ngày</label>
+                                    </br>
+                                    <label for="checkManyLeave"><input type="radio" id="checkManyLeave"
+                                            name="checkLeave" value="2" /> Nhiều ngày</label>
+                                    </br>
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <input type="hidden" value="<%= user._id %>" name="userId">
+                                    <button type="submit" class="btn-submit <% if(!lock){ %>btn-shimmer btn-primary<% } %>" <% if(lock){ %>disabled<% } %> >Chọn</button>
+                                </form>
+                            </div>
+                            <% if(checkLeave==1) { %>
+                                <div class="grid mt-5">
+                                    <article class="articleSize">
+                                        <form class="p-3" action="/post_date_leave" method="POST">
+                                            <div class="form-group">
+                                                <label for="leaveDate" class="col-form-label">Ngày nghỉ</label>
+                                                <input type="date" class="form-control" name="leaveDate" id="leaveDate"
+                                                    value="<%= oldInput.leaveDate %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="leaveTime" class="col-form-label">Số giờ nghỉ</label>
+                                                <input type="number" class="form-control" name="leaveTime"
+                                                    id="leaveTime" placeholder="Số giờ xin nghỉ" min="0"
+                                                    max="<% if (user.annualLeave > 8) { %>8<% } else { %><%= user.annualLeave %><% } %>"
+                                                    value="<%= oldInput.leaveTime %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="reason">Lý do</label>
+                                                <textarea class="form-control" name="reason" id="reason" rows="3"
+                                                    value="<%= oldInput.reason %>"></textarea>
+                                            </div>
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                            <input type="hidden" value="<%= user._id %>" name="userId">
+                                            <input type="hidden" value="1" name="checkLeave">
+                                            <button type="submit" class="btn-submit btn-success">Gửi yêu cầu</button>
+                                        </form>
+                                    </article>
+                                </div>
+                                <% } else if (checkLeave==2) {%>
+                                    <div class="grid mt-5">
+                                        <article class="articleSize">
+                                            <form class="p-3" style="width: 300px;" action="/post_many_date_leave"
+                                                method="POST">
+                                                <div class="form-group">
+                                                    <label for="leaveDate" class="col-form-label">Từ ngày</label>
+                                                    <input type="date" class="form-control" name="leaveFromDate"
+                                                        id="leaveDate" value="<%= oldInput.leaveFromDate %>">
+                                                    <label for="leaveDate" class="col-form-label">Đến ngày</label>
+                                                    <input type="date" class="form-control" name="leaveToDate"
+                                                        id="leaveDate" value="<%= oldInput.leaveToDate %>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="leaveTime" class="col-form-label">Số giờ nghỉ</label>
+                                                    <input type="number" class="form-control" name="leaveTime"
+                                                        id="leaveTime" placeholder="Số giờ xin nghỉ" min="0"
+                                                        max="<%= user.annualLeave %>" value="<%= oldInput.leaveTime %>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="reason">Lý do</label>
+                                                    <textarea class="form-control" name="reason" id="reason" rows="3"
+                                                        value="<%= oldInput.reason %>"></textarea>
+                                                </div>
+                                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                <input type="hidden" value="<%= user._id %>" name="userId">
+                                                <input type="hidden" value="2" name="checkLeave">
+                                                <button type="submit" class="btn-submit btn-success">Gửi yêu
+                                                    cầu</button>
+                                            </form>
+                                        </article>
+                                    </div>
+                                    <% } %>
+                                        <% } else {%>
+                                            <h3>Bạn không đủ ngày phép</h3>
+                                            <p>Số ngày còn lại: <%= user.annualLeave/8 %>
+                                            </p>
+                                            <% } %>
+            </main>
+            <%- include('../includes/end.ejs') %>
+    </body>

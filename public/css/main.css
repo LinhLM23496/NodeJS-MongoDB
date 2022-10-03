@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  background-color: #000;
+  color: #45f3ff;
+}
+
+main {
+  padding: 1rem;
+  margin: auto;
+}
+
+form {
+  display: inline;
+}
+
+.centered {
+  display: grid;
+  justify-content: center;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.formCenter {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+  font-size: 16px;
+}
+
+.card {
+  width: 20rem;
+  max-width: 95%;
+  margin: 1rem;
+  padding: 1rem;
+  color: #000;
+}
+
+.card-image img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.btn {
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+}
+
+.btn-circle {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  margin-left: 2.5rem;
+}
+
+.btn-shimmer {
+  background-image: linear-gradient(
+    -60deg,
+    transparent,
+    transparent 40%,
+    #ffffff 40%,
+    #ffffff 60%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  background-position-x: 150%;
+  cursor: pointer;
+}
+
+.btn-shimmer:hover {
+  background-position-x: -150%;
+  transition: background-position-x 1000ms;
+}
+
+.main-headernav {
+  /* display: inline; */
+  float: right;
+}
+
+.main-headernav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-headernav li {
+  float: left;
+}
+
+.main-headernav a {
+  color: #ffffff;
+}
+
+.main-headernav a:hover {
+  color: #000;
+}
+
+.main-nav-button {
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.user-message {
+  margin: auto;
+  width: 380px;
+  border: 1px solid #4771fa;
+  padding: 0.5rem;
+  border-radius: 3px;
+  background: #b9c9ff;
+  text-align: center;
+}
+
+.user-message--error {
+  border-color: red;
+  background: rgb(255, 176, 176);
+  color: red;
+}
+
+.pagination {
+  margin-top: 2rem;
+  text-align: center;
+  justify-content: center;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #00695c;
+  padding: 0.5rem;
+  border: 1px solid #00695c;
+  margin: 0 1rem;
+}
+
+.pagination a:hover,
+.pagination a:active,
+.pagination button.active {
+  background: #00695c;
+  color: white;
+}
+
+@media (max-width: 575.98px) {
+  body {
+    font-size: 12px;
+  }
+}

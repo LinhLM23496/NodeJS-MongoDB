@@ -1,0 +1,23 @@
+.user-content {
+  width: 30rem;
+  max-width: 95%;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.user-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+
+.imageUrl {
+  border-radius: 12px;
+  color: rgb(59, 255, 59);
+}
+
+.works-status {
+  font-size: 1rem;
+  align-items: center;
+}
